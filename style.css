@@ -15,15 +15,16 @@ color: white;
   top: 0;
   left: 0;
   z-index: 1;
+  max-width: 100vw;
 }
 
 nav {
   color: white;
   z-index: 2;
   position: relative;
-  padding: 4rem 8rem;
+  padding: 1rem;
   display: flex; 
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 
@@ -31,8 +32,7 @@ nav {
 nav ul {
   list-style: none;
   display: flex;
-  gap: 2rem;
-
+  gap: 1rem;
 
 }
 
@@ -43,7 +43,7 @@ nav ul {
   position: absolute;
   font-size: 1.5rem;
   left: 50%;
-  top: 75%;
+  top: 20%;
   transform: translate(-50%, -25%)
 }
 
@@ -53,9 +53,7 @@ nav ul {
   align-items: center;
   justify-content: center;
   margin-top: 8px;
-  padding: 4px;
-  border: 1px solid white;
-  border-radius: 2px;
+  padding: 2px;
 }
 
 a {
