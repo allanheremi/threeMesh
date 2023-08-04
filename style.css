@@ -33,7 +33,9 @@ nav ul {
   display: flex;
   gap: 2rem;
 
+
 }
+
 
 .title {
   color: white;
@@ -52,4 +54,11 @@ nav ul {
   justify-content: center;
   margin-top: 8px;
   padding: 4px;
+  border: 1px solid white;
+  border-radius: 2px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
 }
