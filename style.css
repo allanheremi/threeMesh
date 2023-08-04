@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  overflow-x: hidden;
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+color: white;
+}
+
+.webgl {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+nav {
+  color: white;
+  z-index: 2;
+  position: relative;
+  padding: 4rem 8rem;
+  display: flex; 
+  justify-content: space-between;
+}
+
+
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+
+}
+
+.title {
+  color: white;
+  z-index: 2;
+  position: absolute;
+  font-size: 1.5rem;
+  left: 50%;
+  top: 75%;
+  transform: translate(-50%, -25%)
+}
+
+.titleButton {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  padding: 4px;
+}
