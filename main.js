@@ -90,7 +90,7 @@ controls.enableDamping = true;
 controls.enablePan = false;
 controls.enableZoom = false;
 controls.autoRotate = true;
-controls.autoRotateSpeed = 3;
+controls.autoRotateSpeed = 2;
 
 function generateAndReplaceMesh() {
   const newMesh = generateRandomMesh();
