@@ -90,7 +90,7 @@ controls.enableDamping = true;
 controls.enablePan = false;
 controls.enableZoom = false;
 controls.autoRotate = true;
-controls.autoRotateSpeed = 5;
+controls.autoRotateSpeed = 3;
 
 function generateAndReplaceMesh() {
   const newMesh = generateRandomMesh();
@@ -224,3 +224,56 @@ regenerateButton.addEventListener('click', function() {
   void regenerateButton.offsetWidth; 
   regenerateButton.style.animation = '';
 })
+
+
+
+function getRandomInRange(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+const numStars = 777;
+const starGeometry = new THREE.BufferGeometry();
+const starPositions = new Float32Array(numStars * 3);
+const starColors = new Float32Array(numStars * 3);
+
+const colorsArray = ['#FD8D14', '#FFFFFF', '#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF', '#FFE17B', '#F2BE22', '#F29727', '#F24C3D'];
+
+for (let i = 0; i < numStars; i++) {
+  starPositions[i * 3] = getRandomInRange(-50, 50);
+  starPositions[i * 3 + 1] = getRandomInRange(-50, 50);
+  starPositions[i * 3 + 2] = getRandomInRange(-50, 50);
+
+  const randomColor = new THREE.Color(colorsArray[Math.floor(Math.random() * colorsArray.length)]);
+  starColors[i * 3] = randomColor.r;
+  starColors[i * 3 + 1] = randomColor.g;
+  starColors[i * 3 + 2] = randomColor.b;
+}
+
+starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+starGeometry.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
+
+const starMaterial = new THREE.PointsMaterial({
+  size: 0.1,
+  vertexColors: THREE.VertexColors,
+});
+
+const starPoints = new THREE.Points(starGeometry, starMaterial);
+scene.add(starPoints);
+
+const starLoop = () => {
+  controls.update();
+
+  const positions = starGeometry.attributes.position.array;
+  for (let i = 0; i < numStars; i++) {
+    positions[i * 3 + 2] += 0.01; 
+    if (positions[i * 3 + 2] > 50) {
+      positions[i * 3 + 2] = -50; 
+    }
+  }
+  starGeometry.attributes.position.needsUpdate = true;
+
+  renderer.render(scene, camera);
+  window.requestAnimationFrame(starLoop);
+};
+starLoop();
+
