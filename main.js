@@ -88,7 +88,6 @@ renderer.setClearAlpha(1);
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 controls.enablePan = false;
-controls.enableZoom = false;
 controls.autoRotate = true;
 controls.autoRotateSpeed = 2;
 
@@ -154,7 +153,7 @@ function easeInOutQuad(t) {
 
 function toggleTheme() {
   const startAlpha = renderer.getClearAlpha();
-  const targetAlpha = startAlpha === 1 ? 0.33 : 1;
+  const targetAlpha = startAlpha === 1 ? 0.3 : 1;
   const duration = 1000; 
 
   let startTime = null;
@@ -231,12 +230,12 @@ function getRandomInRange(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-const numStars = 777;
+const numStars = 7777;
 const starGeometry = new THREE.BufferGeometry();
 const starPositions = new Float32Array(numStars * 3);
 const starColors = new Float32Array(numStars * 3);
 
-const colorsArray = ['#FD8D14', '#FFFFFF', '#FFFFFF','#FFFFFF','#FFFFFF','#FFFFFF', '#FFE17B', '#F2BE22', '#F29727', '#F24C3D'];
+const colorsArray = ['#CECE5A', '#FFE17B', '#FD8D14', '#C51605', '#F31559' , '#F2BE22', '#B70404','#090910', '#455D7A', '#374955'];
 
 for (let i = 0; i < numStars; i++) {
   starPositions[i * 3] = getRandomInRange(-50, 50);
