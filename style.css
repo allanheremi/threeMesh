@@ -82,6 +82,16 @@ nav ul {
   animation: rotate 0.8s ease-in-out; 
 }
 
+.musicIcon:hover {
+cursor: pointer;
+}
+
+.musicIcon.muted {
+  opacity: 0.5;
+  text-decoration: line-through red;
+  text-decoration-line: line-through;
+}
+
 @keyframes rotate {
   0% {
     transform: rotate(0deg); 

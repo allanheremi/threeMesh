@@ -140,7 +140,6 @@ titleButton.addEventListener('click', generateAndReplaceMesh);
 
 // Styling stuff
 
-
 const themeButton = document.querySelector('.theme');
 const body = document.getElementsByTagName('body');
 const a = document.getElementsByTagName('a');
@@ -181,8 +180,10 @@ function toggleTheme() {
     const sunThemeColorStart = startAlpha === 1 ? '#F0DE36' : '#20262E';
     const sunThemeColorEnd = startAlpha === 1 ? '#20262E' : '#F0DE36';
 
+
     const interpolatedBodyColor = interpolateColor(bodyColorStart, bodyColorEnd, progress);
     const interpolatedSunThemeColor = interpolateColor(sunThemeColorStart, sunThemeColorEnd, progress);
+    
 
     document.body.style.color = interpolatedBodyColor;
     sunTheme.style.color = interpolatedSunThemeColor;
@@ -276,3 +277,35 @@ const starLoop = () => {
 };
 starLoop();
 
+
+const musicIcon = document.querySelector('.musicIcon');
+const backgroundMusic = document.getElementById('backgroundMusic');
+
+let isMuted = false;
+
+function toggleMusic() {
+  if (isMuted) {
+    backgroundMusic.play();
+  } else {
+    backgroundMusic.pause();
+  }
+  
+  isMuted = !isMuted;
+  updateMusicIcon();
+}
+
+  
+
+function updateMusicIcon() {
+  if (isMuted) {
+    musicIcon.classList.add('muted');
+    musicIcon.classList.add('strikethrough-diagonal')
+  } else {
+    musicIcon.classList.remove('muted');
+    musicIcon.classList.remove('strikethrough-diagonal')
+  }
+}
+
+musicIcon.addEventListener('click', toggleMusic);
+
+updateMusicIcon();
