@@ -16,23 +16,19 @@ function generateRandomMesh() {
     new THREE.CylinderGeometry(1, 1, 5, 6),
     new THREE.TorusGeometry(2, 1, 36, 100),
     new THREE.TorusKnotGeometry(2, 0.4, 16, 16),
-    
+
     new THREE.SphereGeometry(2, 62, 62),
     new THREE.BoxGeometry(4, 4, 4),
     new THREE.ConeGeometry(2, 4, 18),
     new THREE.CylinderGeometry(1, 1, 5, 4),
     new THREE.TorusGeometry(2, 1, 28, 80),
     new THREE.TorusKnotGeometry(2, 0.4, 16, 24),
-    
+
     new THREE.SphereGeometry(3, 64, 64),
     new THREE.BoxGeometry(3, 3, 3),
     new THREE.ConeGeometry(2, 4, 11),
     new THREE.TorusGeometry(2, 1, 12, 33),
     new THREE.TorusKnotGeometry(2, 0.4, 12, 14),
-    
- 
-    
-    
   ];
 
   const geometry = meshArr[Math.floor(Math.random() * meshArr.length)];
@@ -81,10 +77,13 @@ const sizes = {
   width: window.innerWidth,
   height: window.innerHeight,
 };
+
 const canvas = document.querySelector('.webgl');
-const renderer = new THREE.WebGLRenderer({ canvas });
+const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
 renderer.setSize(sizes.width, sizes.height);
-renderer.setPixelRatio(3)
+renderer.setPixelRatio(3);
+renderer.setClearAlpha(1);
+
 
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
@@ -137,3 +136,91 @@ window.addEventListener('mousemove', e => {
 
 const titleButton = document.querySelector('.titleButton');
 titleButton.addEventListener('click', generateAndReplaceMesh);
+
+
+
+// Styling stuff
+
+
+const themeButton = document.querySelector('.theme');
+const body = document.getElementsByTagName('body');
+const a = document.getElementsByTagName('a');
+const sunTheme = document.querySelector('.sunTheme')
+themeButton.addEventListener('click', toggleTheme);
+
+function easeInOutQuad(t) {
+  return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+}
+
+function toggleTheme() {
+  const startAlpha = renderer.getClearAlpha();
+  const targetAlpha = startAlpha === 1 ? 0.25 : 1;
+  const duration = 1000; 
+
+  let startTime = null;
+
+  function animate(currentTime) {
+    if (!startTime) startTime = currentTime;
+
+    const elapsedTime = currentTime - startTime;
+    const progress = Math.min(elapsedTime / duration, 1);
+    const easedProgress = easeInOutQuad(progress);
+
+    const newAlpha = startAlpha + (targetAlpha - startAlpha) * easedProgress;
+    renderer.setClearAlpha(newAlpha);
+
+    updateColors(easedProgress); 
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    }
+  }
+
+  function updateColors(progress) {
+    const bodyColorStart = startAlpha === 1 ? '#F6F4EB' : '#20262E';
+    const bodyColorEnd = startAlpha === 1 ? '#20262E' : '#F6F4EB';
+    const sunThemeColorStart = startAlpha === 1 ? '#F0DE36' : '#20262E';
+    const sunThemeColorEnd = startAlpha === 1 ? '#20262E' : '#F0DE36';
+
+    const interpolatedBodyColor = interpolateColor(bodyColorStart, bodyColorEnd, progress);
+    const interpolatedSunThemeColor = interpolateColor(sunThemeColorStart, sunThemeColorEnd, progress);
+
+    document.body.style.color = interpolatedBodyColor;
+    sunTheme.style.color = interpolatedSunThemeColor;
+
+    for (const link of a) {
+      link.style.color = interpolatedBodyColor;
+    }
+  }
+
+  requestAnimationFrame(animate);
+}
+
+function interpolateColor(startColor, endColor, progress) {
+  const startRGB = hexToRgb(startColor);
+  const endRGB = hexToRgb(endColor);
+
+  const interpolatedRGB = [];
+  for (let i = 0; i < 3; i++) {
+    interpolatedRGB[i] = Math.round(startRGB[i] + (endRGB[i] - startRGB[i]) * progress);
+  }
+
+  return `rgb(${interpolatedRGB.join(',')})`;
+}
+
+function hexToRgb(hex) {
+  const bigint = parseInt(hex.slice(1), 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+  return [r, g, b];
+}
+
+
+const regenerateButton = document.querySelector('.regenerate');
+
+regenerateButton.addEventListener('click', function() {
+  regenerateButton.style.animation = 'none'; 
+  void regenerateButton.offsetWidth; 
+  regenerateButton.style.animation = '';
+})
