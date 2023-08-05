@@ -281,7 +281,7 @@ starLoop();
 const musicIcon = document.querySelector('.musicIcon');
 const backgroundMusic = document.getElementById('backgroundMusic');
 
-let isMuted = false;
+let isMuted = true;
 
 function toggleMusic() {
   if (isMuted) {
