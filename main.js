@@ -154,7 +154,7 @@ function easeInOutQuad(t) {
 
 function toggleTheme() {
   const startAlpha = renderer.getClearAlpha();
-  const targetAlpha = startAlpha === 1 ? 0.25 : 1;
+  const targetAlpha = startAlpha === 1 ? 0.33 : 1;
   const duration = 1000; 
 
   let startTime = null;
