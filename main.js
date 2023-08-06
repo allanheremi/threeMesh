@@ -3,7 +3,16 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { generateRandomMesh } from './meshgenerator';
 import { gsap } from 'gsap';
 
-console.log('test');
+
+
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    body.style.background = '#29f1f8'
+  }, 1000)
+
+
+});
+
 
 generateRandomMesh();
 
@@ -330,3 +339,4 @@ function updateMusicIcon() {
 musicIcon.addEventListener('click', toggleMusic);
 
 updateMusicIcon();
+

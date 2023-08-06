@@ -4,9 +4,6 @@
   box-sizing: border-box;
 }
 
-html {
-  background-color: #29f1f8;
-}
 
 body {
   overflow-x: hidden;
@@ -126,3 +123,4 @@ nav ul {
     transform: rotate(360deg);
   }
 }
+
