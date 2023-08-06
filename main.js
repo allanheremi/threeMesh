@@ -49,7 +49,7 @@ const sizes = {
 const canvas = document.querySelector('.webgl');
 const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
 renderer.setSize(sizes.width, sizes.height);
-renderer.setPixelRatio(5);
+renderer.setPixelRatio(4);
 renderer.setClearAlpha(1);
 
 const controls = new OrbitControls(camera, canvas);
