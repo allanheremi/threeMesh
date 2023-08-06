@@ -1,47 +1,11 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.module.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { generateRandomMesh } from './meshgenerator';
 import { gsap } from 'gsap';
 
-console.log('test')
+console.log('test');
 
-function getRandomColor() {
-  return Math.floor(Math.random() * 16777215).toString(16);
-}
-
-function generateRandomMesh() {
-  const randomColor = getRandomColor();
-
-  let meshArr = [
-    new THREE.SphereGeometry(3, 64, 64),
-    new THREE.BoxGeometry(5, 5, 5),
-    new THREE.ConeGeometry(3, 5, 16),
-    new THREE.CylinderGeometry(1, 1, 5, 6),
-    new THREE.TorusGeometry(2, 1, 36, 100),
-    new THREE.TorusKnotGeometry(2, 0.4, 16, 16),
-
-    new THREE.SphereGeometry(2, 62, 62),
-    new THREE.BoxGeometry(4, 4, 4),
-    new THREE.ConeGeometry(2, 4, 18),
-    new THREE.CylinderGeometry(1, 1, 5, 4),
-    new THREE.TorusGeometry(2, 1, 28, 80),
-    new THREE.TorusKnotGeometry(2, 0.4, 16, 24),
-
-    new THREE.SphereGeometry(3, 64, 64),
-    new THREE.BoxGeometry(3, 3, 3),
-    new THREE.ConeGeometry(2, 4, 11),
-    new THREE.TorusGeometry(2, 1, 12, 33),
-    new THREE.TorusKnotGeometry(2, 0.4, 12, 14),
-  ];
-
-  const geometry = meshArr[Math.floor(Math.random() * meshArr.length)];
-  const material = new THREE.MeshStandardMaterial({
-    color: `#${randomColor}`,
-    roughness: 0.69,
-  });
-
-  const mesh = new THREE.Mesh(geometry, material);
-  return mesh;
-}
+generateRandomMesh();
 
 const scene = new THREE.Scene();
 const light = new THREE.PointLight(0xffffff, 1, 100);
@@ -71,7 +35,8 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   100
 );
-camera.position.z = 18;
+camera.position.z = 20;
+camera.position.y = 5;
 
 scene.add(camera);
 
@@ -86,12 +51,11 @@ renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(3);
 renderer.setClearAlpha(1);
 
-
 const controls = new OrbitControls(camera, canvas);
 controls.enableDamping = true;
 controls.enablePan = false;
 controls.autoRotate = true;
-controls.autoRotateSpeed = 2;
+controls.autoRotateSpeed = 0.6;
 
 function generateAndReplaceMesh() {
   const newMesh = generateRandomMesh();
@@ -135,17 +99,37 @@ window.addEventListener('mousemove', e => {
   }
 });
 
+let touchDown = false;
+
+window.addEventListener('touchstart', () => (touchDown = true));
+window.addEventListener('touchend', () => (touchDown = false));
+window.addEventListener('touchmove', (event) => {
+  if (touchDown) {
+    const touch = event.touches[0];
+    rgb = [
+      Math.round((touch.pageX / sizes.width) * 255),
+      Math.round((touch.pageY / sizes.height) * 255),
+      150,
+    ];
+    const newColor = new THREE.Color(`rgb(${rgb.join(',')})`);
+    gsap.to(mesh.material.color, {
+      r: newColor.r,
+      g: newColor.g,
+      b: newColor.b,
+    });
+  }
+});
+
+
 const titleButton = document.querySelector('.titleButton');
 titleButton.addEventListener('click', generateAndReplaceMesh);
-
-
 
 // Styling stuff
 
 const themeButton = document.querySelector('.theme');
 const body = document.getElementsByTagName('body');
 const a = document.getElementsByTagName('a');
-const sunTheme = document.querySelector('.sunTheme')
+const sunTheme = document.querySelector('.sunTheme');
 themeButton.addEventListener('click', toggleTheme);
 
 function easeInOutQuad(t) {
@@ -155,7 +139,7 @@ function easeInOutQuad(t) {
 function toggleTheme() {
   const startAlpha = renderer.getClearAlpha();
   const targetAlpha = startAlpha === 1 ? 0.3 : 1;
-  const duration = 1000; 
+  const duration = 1000;
 
   let startTime = null;
 
@@ -169,7 +153,7 @@ function toggleTheme() {
     const newAlpha = startAlpha + (targetAlpha - startAlpha) * easedProgress;
     renderer.setClearAlpha(newAlpha);
 
-    updateColors(easedProgress); 
+    updateColors(easedProgress);
 
     if (progress < 1) {
       requestAnimationFrame(animate);
@@ -177,15 +161,21 @@ function toggleTheme() {
   }
 
   function updateColors(progress) {
-    const bodyColorStart = startAlpha === 1 ? '#F6F4EB' : '#20262E';
-    const bodyColorEnd = startAlpha === 1 ? '#20262E' : '#F6F4EB';
-    const sunThemeColorStart = startAlpha === 1 ? '#F0DE36' : '#20262E';
-    const sunThemeColorEnd = startAlpha === 1 ? '#20262E' : '#F0DE36';
+    const bodyColorStart = startAlpha === 1 ? '#F6F4EB' : '#322653';
+    const bodyColorEnd = startAlpha === 1 ? '#322653' : '#F6F4EB';
+    const sunThemeColorStart = startAlpha === 1 ? '#F0DE36' : '#322653';
+    const sunThemeColorEnd = startAlpha === 1 ? '#322653' : '#F0DE36';
 
-
-    const interpolatedBodyColor = interpolateColor(bodyColorStart, bodyColorEnd, progress);
-    const interpolatedSunThemeColor = interpolateColor(sunThemeColorStart, sunThemeColorEnd, progress);
-    
+    const interpolatedBodyColor = interpolateColor(
+      bodyColorStart,
+      bodyColorEnd,
+      progress
+    );
+    const interpolatedSunThemeColor = interpolateColor(
+      sunThemeColorStart,
+      sunThemeColorEnd,
+      progress
+    );
 
     document.body.style.color = interpolatedBodyColor;
     sunTheme.style.color = interpolatedSunThemeColor;
@@ -204,7 +194,9 @@ function interpolateColor(startColor, endColor, progress) {
 
   const interpolatedRGB = [];
   for (let i = 0; i < 3; i++) {
-    interpolatedRGB[i] = Math.round(startRGB[i] + (endRGB[i] - startRGB[i]) * progress);
+    interpolatedRGB[i] = Math.round(
+      startRGB[i] + (endRGB[i] - startRGB[i]) * progress
+    );
   }
 
   return `rgb(${interpolatedRGB.join(',')})`;
@@ -218,40 +210,69 @@ function hexToRgb(hex) {
   return [r, g, b];
 }
 
-
 const regenerateButton = document.querySelector('.regenerate');
 
-regenerateButton.addEventListener('click', function() {
-  regenerateButton.style.animation = 'none'; 
-  void regenerateButton.offsetWidth; 
+regenerateButton.addEventListener('click', function () {
+  regenerateButton.style.animation = 'none';
+  void regenerateButton.offsetWidth;
   regenerateButton.style.animation = '';
-})
-
-
+});
 
 function getRandomInRange(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-const numStars = 7777;
+const numStars = 15000;
 const starGeometry = new THREE.BufferGeometry();
 const starPositions = new Float32Array(numStars * 3);
 const starColors = new Float32Array(numStars * 3);
 
-const colorsArray = ['#CECE5A', '#FFE17B', '#FD8D14', '#C51605', '#F31559' , '#F2BE22', '#B70404','#090910', '#455D7A', '#374955'];
+const colorsArray = [
+  '#C8AE7D',
+  '#8CABFF',
+  '#9F91CC',
+  '#FFDBC3',
+  '#F7E987',
+  '#272829',
+  '#272829',
+  '#272829',
+  '#272829',
+  '#272829',
+  '#272829',
+  '#272829',
+  '#272829',
+  '#272829',
+  '#ffffff',
+  '#ffffff',
+  '#ffffff',
+  '#ffffff',
+  '#ffffff',
+  '#ffffff',
+  '#ffffff',
+  '#ffffff',
+  '#ffffff',
+  '#ffffff',
+  '#ffffff',
+
+];
 
 for (let i = 0; i < numStars; i++) {
   starPositions[i * 3] = getRandomInRange(-50, 50);
   starPositions[i * 3 + 1] = getRandomInRange(-50, 50);
   starPositions[i * 3 + 2] = getRandomInRange(-50, 50);
 
-  const randomColor = new THREE.Color(colorsArray[Math.floor(Math.random() * colorsArray.length)]);
+  const randomColor = new THREE.Color(
+    colorsArray[Math.floor(Math.random() * colorsArray.length)]
+  );
   starColors[i * 3] = randomColor.r;
   starColors[i * 3 + 1] = randomColor.g;
   starColors[i * 3 + 2] = randomColor.b;
 }
 
-starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+starGeometry.setAttribute(
+  'position',
+  new THREE.BufferAttribute(starPositions, 3)
+);
 starGeometry.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
 
 const starMaterial = new THREE.PointsMaterial({
@@ -267,9 +288,9 @@ const starLoop = () => {
 
   const positions = starGeometry.attributes.position.array;
   for (let i = 0; i < numStars; i++) {
-    positions[i * 3 + 2] += 0.01; 
+    positions[i * 3 + 2] += 0.01;
     if (positions[i * 3 + 2] > 50) {
-      positions[i * 3 + 2] = -50; 
+      positions[i * 3 + 2] = -50;
     }
   }
   starGeometry.attributes.position.needsUpdate = true;
@@ -278,7 +299,6 @@ const starLoop = () => {
   window.requestAnimationFrame(starLoop);
 };
 starLoop();
-
 
 const musicIcon = document.querySelector('.musicIcon');
 const backgroundMusic = document.getElementById('backgroundMusic');
@@ -291,20 +311,18 @@ function toggleMusic() {
   } else {
     backgroundMusic.pause();
   }
-  
+
   isMuted = !isMuted;
   updateMusicIcon();
 }
 
-  
-
 function updateMusicIcon() {
   if (isMuted) {
     musicIcon.classList.add('muted');
-    musicIcon.classList.add('strikethrough-diagonal')
+    musicIcon.classList.add('strikethrough-diagonal');
   } else {
     musicIcon.classList.remove('muted');
-    musicIcon.classList.remove('strikethrough-diagonal')
+    musicIcon.classList.remove('strikethrough-diagonal');
   }
 }
 

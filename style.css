@@ -5,6 +5,8 @@
 }
 
 body {
+  z-index: 1;
+  background: #89d1ed;
 overflow-x: hidden;
 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 color: white;
@@ -79,7 +81,7 @@ nav ul {
 
 .regenerate {
   font-size: 2.5rem;
-  animation: rotate 0.8s ease-in-out; 
+  animation: rotate 0.65s ease-out; 
 }
 
 .musicIcon:hover {
