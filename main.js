@@ -2,6 +2,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.m
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { gsap } from 'gsap';
+import assetPaths from './public/assets/cat_dispenser/assetpaths';
 
 console.log('deployment')
 
@@ -16,7 +17,7 @@ function generateRandomMesh() {
   let meshArr = [];
 
   loader.load(
-    'assets/cat/scene.gltf',
+    'public/assets/cat_dispenser/scene.gltf',
     (gltf) => {
         scene.add(gltf.scene);
     },
