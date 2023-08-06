@@ -7,7 +7,13 @@ const init = () => {
   setTimeout(() => {
     const body = document.getElementsByTagName('body')
     document.body.classList.remove('hidden')
-  }, 650)
+  }, 400)
+
+  setTimeout(()=> {
+    const body = document.getElementsByTagName('body')
+    document.body.classList.add('bg')
+  }, 620)
+
 }
 init()
 
