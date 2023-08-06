@@ -5,11 +5,10 @@
 }
 
 html {
-background-color: bisque;
+  background-color: #29f1f8;
 }
 
 body {
-  z-index: -9999;
   overflow-x: hidden;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color: white;
@@ -52,8 +51,10 @@ nav ul {
   top: 15%;
   transform: translate(-50%, -25%);
   text-align: center;
-  text-shadow: 0.2px 0.2px 0px;
-  font-weight: 650;
+  font-weight: 700;
+  text-shadow: 3px 3px 100px #febede,
+  -2px 1px 12px #febede;
+
 }
 
 .titleButton {
@@ -63,11 +64,26 @@ nav ul {
   justify-content: center;
   margin-top: 8px;
   padding: 2px;
+  transition: transform 300ms ease-out;
 }
 
 .titleButton:hover {
   cursor: pointer;
+  transform: scale(1.1);
 }
+
+.scaleIn {
+  padding: 2px;
+  transition: transform 400ms ease-out;
+}
+
+.scaleIn:hover {
+  cursor: pointer;
+  transform: scale(1.14);
+}
+
+
+
 
 .sunTheme {
   color: #f0de36;
@@ -88,13 +104,18 @@ nav ul {
 }
 
 .musicIcon.muted {
-  opacity: 0.5;
-  text-decoration: line-through red;
+  opacity: 0.7;
+  text-decoration: line-through rgb(249, 57, 57);
   text-decoration-line: line-through;
 }
 
 .unmarkable {
   user-select: none;
+}
+
+.textDecor {
+  text-shadow: 3px 3px 100px #febede,
+  -2px 1px 12px #febede;
 }
 
 @keyframes rotate {

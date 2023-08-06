@@ -162,10 +162,10 @@ function toggleTheme() {
   }
 
   function updateColors(progress) {
-    const bodyColorStart = startAlpha === 1 ? '#F6F4EB' : '#322653';
-    const bodyColorEnd = startAlpha === 1 ? '#322653' : '#F6F4EB';
-    const sunThemeColorStart = startAlpha === 1 ? '#F0DE36' : '#322653';
-    const sunThemeColorEnd = startAlpha === 1 ? '#322653' : '#F0DE36';
+    const bodyColorStart = startAlpha === 1 ? '#F6F4EB' : '#FFDBC3';
+    const bodyColorEnd = startAlpha === 1 ? '#FFDBC3' : '#F6F4EB';
+    const sunThemeColorStart = startAlpha === 1 ? '#F0DE36' : '#FFDBC3';
+    const sunThemeColorEnd = startAlpha === 1 ? '#FFDBC3' : '#F0DE36';
 
     const interpolatedBodyColor = interpolateColor(
       bodyColorStart,
