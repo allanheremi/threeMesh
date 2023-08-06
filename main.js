@@ -1,5 +1,7 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.module.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import assetPaths from './assetpaths';
 import { gsap } from 'gsap';
 
 
@@ -10,33 +12,26 @@ function getRandomColor() {
 function generateRandomMesh() {
   const randomColor = getRandomColor();
 
+ const loader = new GLTFLoader()
+
+  loader.load(assetPaths, (gltf) => {
+    const model = gltf.scene;
+    scene.add(model)
+    meshArr.push(model)
+  });
+
   let meshArr = [
-    new THREE.SphereGeometry(3, 64, 64),
-    new THREE.BoxGeometry(5, 5, 5),
-    new THREE.ConeGeometry(3, 5, 16),
-    new THREE.CylinderGeometry(1, 1, 5, 6),
-    new THREE.TorusGeometry(2, 1, 36, 100),
-    new THREE.TorusKnotGeometry(2, 0.4, 16, 16),
-
-    new THREE.SphereGeometry(2, 62, 62),
-    new THREE.BoxGeometry(4, 4, 4),
-    new THREE.ConeGeometry(2, 4, 18),
-    new THREE.CylinderGeometry(1, 1, 5, 4),
-    new THREE.TorusGeometry(2, 1, 28, 80),
-    new THREE.TorusKnotGeometry(2, 0.4, 16, 24),
-
-    new THREE.SphereGeometry(3, 64, 64),
-    new THREE.BoxGeometry(3, 3, 3),
-    new THREE.ConeGeometry(2, 4, 11),
-    new THREE.TorusGeometry(2, 1, 12, 33),
-    new THREE.TorusKnotGeometry(2, 0.4, 12, 14),
-  ];
+    loader.load(assetPaths, (gltf) => {
+      const model = gltf.scene;
+      scene.add(model)})
+    ];
 
   const geometry = meshArr[Math.floor(Math.random() * meshArr.length)];
   const material = new THREE.MeshStandardMaterial({
     color: `#${randomColor}`,
     roughness: 0.69,
-  });
+  }
+  );
 
   const mesh = new THREE.Mesh(geometry, material);
   return mesh;

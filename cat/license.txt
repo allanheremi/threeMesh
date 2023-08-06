@@ -1,0 +1,11 @@
+Model Information:
+* title:	Cat
+* source:	https://sketchfab.com/3d-models/cat-70a23788ef984a7a9a1c9a9fe6d5a651
+* author:	Suushimi (https://sketchfab.com/Suushimi)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Cat" (https://sketchfab.com/3d-models/cat-70a23788ef984a7a9a1c9a9fe6d5a651) by Suushimi (https://sketchfab.com/Suushimi) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
