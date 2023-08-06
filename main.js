@@ -3,8 +3,13 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { generateRandomMesh } from './meshgenerator';
 import { gsap } from 'gsap';
 
-
-
+const init = () => {
+  setTimeout(() => {
+    const body = document.getElementsByTagName('body')
+    document.body.classList.remove('hidden')
+  }, 450)
+}
+init()
 
 generateRandomMesh();
 
