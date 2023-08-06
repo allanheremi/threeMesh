@@ -124,3 +124,6 @@ nav ul {
   }
 }
 
+.hidden {
+  display: none;
+}

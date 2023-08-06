@@ -6,6 +6,8 @@ import { gsap } from 'gsap';
 
 
 window.addEventListener('DOMContentLoaded', () => {
+  const body = document.body;
+  body.classList.remove('hidden'); 
   setTimeout(() => {
     body.style.background = '#29f1f8'
   }, 1000)
