@@ -11,7 +11,7 @@ generateRandomMesh();
 const scene = new THREE.Scene();
 const light = new THREE.PointLight(0xffffff, 1, 100);
 light.position.set(10, 0, -10);
-light.intensity = 1.25;
+light.intensity = 0.4;
 scene.add(light);
 
 const light1 = new THREE.PointLight(0xffffff, 1);
@@ -235,15 +235,8 @@ const colorsArray = [
   '#9F91CC',
   '#FFDBC3',
   '#F7E987',
-  '#272829',
-  '#272829',
-  '#272829',
-  '#272829',
-  '#272829',
-  '#272829',
-  '#272829',
-  '#272829',
-  '#272829',
+  '#F7D060',
+  '#F45050',
   '#ffffff',
   '#ffffff',
   '#ffffff',
