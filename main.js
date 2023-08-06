@@ -7,7 +7,7 @@ const init = () => {
   setTimeout(() => {
     const body = document.getElementsByTagName('body')
     document.body.classList.remove('hidden')
-  }, 450)
+  }, 650)
 }
 init()
 
