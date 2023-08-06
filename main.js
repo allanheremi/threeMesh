@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const body = document.body;
   body.classList.remove('hidden'); 
   setTimeout(() => {
-    body.style.background = '#29f1f8'
+    body.style.background = '#00b4d8'
   }, 1000)
 
 
@@ -150,7 +150,7 @@ function easeInOutQuad(t) {
 
 function toggleTheme() {
   const startAlpha = renderer.getClearAlpha();
-  const targetAlpha = startAlpha === 1 ? 0.3 : 1;
+  const targetAlpha = startAlpha === 1 ? 0 : 1;
   const duration = 1000;
 
   let startTime = null;
