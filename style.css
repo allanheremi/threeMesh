@@ -4,12 +4,16 @@
   box-sizing: border-box;
 }
 
+html {
+  background: linear-gradient(to bottom, #272829, #61677a, #d8d9da, #fff6e0) no-repeat;
+
+}
 
 body {
-  z-index: 1;
-overflow-x: hidden;
-font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-color: white;
+  z-index: -9999;
+  overflow-x: hidden;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: white;
 }
 
 a {
@@ -17,23 +21,20 @@ a {
   text-decoration: none;
 }
 
-
 nav {
   z-index: 2;
   position: relative;
   padding: 1rem;
-  display: flex; 
+  display: flex;
   justify-content: flex-end;
+  background-color: transparent;
 }
-
-
 
 nav ul {
   list-style: none;
   display: flex;
   gap: 1rem;
 }
-
 
 .webgl {
   position: absolute;
@@ -43,7 +44,6 @@ nav ul {
   max-width: 100vw;
 }
 
-
 .title {
   z-index: 2;
   position: absolute;
@@ -52,7 +52,7 @@ nav ul {
   top: 15%;
   transform: translate(-50%, -25%);
   text-align: center;
-  text-shadow: 0.2px 0.2px 0px; 
+  text-shadow: 0.2px 0.2px 0px;
   font-weight: 650;
 }
 
@@ -69,9 +69,8 @@ nav ul {
   cursor: pointer;
 }
 
-
 .sunTheme {
-  color: #F0DE36;
+  color: #f0de36;
   padding: 0.1rem;
 }
 
@@ -81,11 +80,11 @@ nav ul {
 
 .regenerate {
   font-size: 2.5rem;
-  animation: rotate 0.65s ease-out; 
+  animation: rotate 0.65s ease-out;
 }
 
 .musicIcon:hover {
-cursor: pointer;
+  cursor: pointer;
 }
 
 .musicIcon.muted {
@@ -100,7 +99,7 @@ cursor: pointer;
 
 @keyframes rotate {
   0% {
-    transform: rotate(0deg); 
+    transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
