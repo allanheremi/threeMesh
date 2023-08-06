@@ -3,21 +3,22 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { generateRandomMesh } from './meshgenerator';
 import { gsap } from 'gsap';
 
-const init = () => {
-  setTimeout(() => {
-    const body = document.getElementsByTagName('body')
-    document.body.classList.remove('hidden')
-  }, 400)
-
-  setTimeout(()=> {
-    const body = document.getElementsByTagName('body')
-    document.body.classList.add('bg')
-  }, 800)
-
+const init = async () => {
+  await document.body.classList.add('bgblack');
+  await document.body.classList.remove('hidden');
+  
+  await new Promise(resolve => {
+    setTimeout(() => {
+      document.body.classList.add('bg');
+      resolve();
+    }, 3000);
+  });
+  
+  await document.body.classList.remove('bgblack');
+  await generateRandomMesh();
 }
 init()
 
-generateRandomMesh();
 
 const scene = new THREE.Scene();
 const light = new THREE.PointLight(0xffffff, 1, 100);

@@ -18,6 +18,10 @@ body {
   background: #8dd4f0;
 }
 
+.bgblack {
+  background: #000000;
+}
+
 a {
   color: white;
   text-decoration: none;
