@@ -5,8 +5,7 @@
 }
 
 html {
-  background: linear-gradient(to bottom, #272829, #61677a, #d8d9da, #fff6e0) no-repeat;
-
+background-color: bisque;
 }
 
 body {
@@ -42,6 +41,7 @@ nav ul {
   left: 0;
   z-index: 1;
   max-width: 100vw;
+  max-height: 100vw;
 }
 
 .title {
