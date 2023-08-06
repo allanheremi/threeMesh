@@ -5,16 +5,6 @@ import { gsap } from 'gsap';
 
 
 
-window.addEventListener('DOMContentLoaded', () => {
-  const body = document.body;
-  body.classList.remove('hidden'); 
-  setTimeout(() => {
-    body.style.background = '#00b4d8'
-  }, 1000)
-
-
-});
-
 
 generateRandomMesh();
 
