@@ -4,9 +4,9 @@
   box-sizing: border-box;
 }
 
+
 body {
   z-index: 1;
-  background: #89d1ed;
 overflow-x: hidden;
 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 color: white;
