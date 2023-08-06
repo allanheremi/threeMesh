@@ -2,6 +2,8 @@
 
 Welcome to three-mesh, an interactive 3D web application that allows you to explore and create various geometries in a vibrant virtual environment. This project is a playful introduction to the world of 3D programming using the popular Three.js library. 
 
+## Preview
+
 <div style="display: flex; justify-content: space-between;">
   <img src="./public/assets/preview2.png" alt="Preview 2" width="49%">
   <img src="./public/assets/preview1.png" alt="Preview 1" width="49%">
