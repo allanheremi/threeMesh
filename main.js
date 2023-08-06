@@ -12,7 +12,7 @@ const init = () => {
   setTimeout(()=> {
     const body = document.getElementsByTagName('body')
     document.body.classList.add('bg')
-  }, 620)
+  }, 800)
 
 }
 init()
