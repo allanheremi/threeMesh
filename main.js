@@ -224,7 +224,7 @@ function getRandomInRange(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-const numStars = 15000;
+const numStars = 4444;
 const starGeometry = new THREE.BufferGeometry();
 const starPositions = new Float32Array(numStars * 3);
 const starColors = new Float32Array(numStars * 3);
