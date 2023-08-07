@@ -17,30 +17,24 @@ const init = async () => {
   await document.body.classList.remove('bgblack');
   await generateRandomMesh();
 }
-init()
-
+init();
 
 const scene = new THREE.Scene();
-const light = new THREE.PointLight(0xffffff, 1, 100);
-light.position.set(10, 0, -10);
-light.intensity = 0.4;
-scene.add(light);
 
-const light1 = new THREE.PointLight(0xffffff, 1);
-light1.position.set(0, 10, 10);
-scene.add(light1);
+const lights = [
+  createLight(10, 0, -10, 0.4),
+  createLight(0, 10, 10, 1),
+  createLight(10, 0, 10, 1),
+  createLight(0, -10, 10, 1),
+  createLight(-10, 0, 10, 1),
+];
 
-const light2 = new THREE.PointLight(0xffffff, 1);
-light2.position.set(10, 0, 10);
-scene.add(light2);
-
-const light3 = new THREE.PointLight(0xffffff, 1);
-light3.position.set(0, -10, 10);
-scene.add(light3);
-
-const light4 = new THREE.PointLight(0xffffff, 1);
-light4.position.set(-10, 0, 10);
-scene.add(light4);
+function createLight(x, y, z, intensity = 1) {
+  const light = new THREE.PointLight(0xffffff, intensity);
+  light.position.set(x, y, z);
+  scene.add(light);
+  return light;
+}
 
 const camera = new THREE.PerspectiveCamera(
   45,
@@ -50,7 +44,6 @@ const camera = new THREE.PerspectiveCamera(
 );
 camera.position.z = 20;
 camera.position.y = 5;
-
 scene.add(camera);
 
 const sizes = {
@@ -95,6 +88,7 @@ tl.fromTo('.title', { opacity: 0 }, { opacity: 1 });
 
 let mouseDown = false;
 let rgb = [];
+
 window.addEventListener('mousedown', () => (mouseDown = true));
 window.addEventListener('mouseup', () => (mouseDown = false));
 window.addEventListener('mousemove', e => {
@@ -138,7 +132,6 @@ window.addEventListener('touchmove', (event) => {
 const titleButton = document.querySelector('.titleButton');
 titleButton.addEventListener('click', generateAndReplaceMesh);
 
-// Styling stuff
 
 const themeButton = document.querySelector('.theme');
 const body = document.getElementsByTagName('body');
