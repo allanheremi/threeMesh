@@ -1,5 +1,6 @@
 # Three.js Geometries Playground [Three-mesh]
 
+## This application was made with the purpose of learning how to work with 3D models
 Welcome to three-mesh, an interactive 3D web application that allows you to explore and create various geometries in a vibrant virtual environment. This project is a playful introduction to the world of 3D programming using the popular Three.js library. 
 
 ## Preview
